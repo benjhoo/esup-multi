@@ -1,0 +1,14 @@
+name: Check PR Base Branch
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is targeting `main` branch
+        if: github.event.pull_request.base.ref == 'main'
+        run: |
+          echo "::warning::Vous avez ouvert une PR vers `main`. Merci de la rediriger vers `develop`."
